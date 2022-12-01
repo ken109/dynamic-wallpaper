@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CCEE6B172BCA92ADE36F6E8 /* Pods_DynamicWallpaper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554D3CDA5FB83E8E6E4F0FE9 /* Pods_DynamicWallpaper.framework */; };
 		AE3283B229370C4B008A1E46 /* DynamicWallpaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */; };
 		AE3283B429370C4B008A1E46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3283B329370C4B008A1E46 /* ContentView.swift */; };
 		AE3283B629370C4C008A1E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B529370C4C008A1E46 /* Assets.xcassets */; };
 		AE3283B929370C4C008A1E46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */; };
+		BC588065122AC5075A618FE6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5889484685012C4A207E85 /* WebView.swift */; };
+		BC58868D34842C5A356509C6 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588601108DA861C59A2727 /* WallpaperView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		554D3CDA5FB83E8E6E4F0FE9 /* Pods_DynamicWallpaper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DynamicWallpaper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7564613BE8BA72570880505C /* Pods-DynamicWallpaper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicWallpaper.debug.xcconfig"; path = "Target Support Files/Pods-DynamicWallpaper/Pods-DynamicWallpaper.debug.xcconfig"; sourceTree = "<group>"; };
 		AE3283AE29370C4B008A1E46 /* DynamicWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicWallpaperApp.swift; sourceTree = "<group>"; };
 		AE3283B329370C4B008A1E46 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AE3283B529370C4C008A1E46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DynamicWallpaper.entitlements; sourceTree = "<group>"; };
+		BC588601108DA861C59A2727 /* WallpaperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperView.swift; sourceTree = "<group>"; };
+		BC5889484685012C4A207E85 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		F059E632F7E00F9CAE980F4B /* Pods-DynamicWallpaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicWallpaper.release.xcconfig"; path = "Target Support Files/Pods-DynamicWallpaper/Pods-DynamicWallpaper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,17 +35,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CCEE6B172BCA92ADE36F6E8 /* Pods_DynamicWallpaper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB50EAAF60BDFC96D93EB887 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7564613BE8BA72570880505C /* Pods-DynamicWallpaper.debug.xcconfig */,
+				F059E632F7E00F9CAE980F4B /* Pods-DynamicWallpaper.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AE3283A529370C4B008A1E46 = {
 			isa = PBXGroup;
 			children = (
 				AE3283B029370C4B008A1E46 /* DynamicWallpaper */,
 				AE3283AF29370C4B008A1E46 /* Products */,
+				AB50EAAF60BDFC96D93EB887 /* Pods */,
+				DDF2AF29A897CD217DEDE867 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +77,8 @@
 				AE3283B529370C4C008A1E46 /* Assets.xcassets */,
 				AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */,
 				AE3283B729370C4C008A1E46 /* Preview Content */,
+				BC588601108DA861C59A2727 /* WallpaperView.swift */,
+				BC5889484685012C4A207E85 /* WebView.swift */,
 			);
 			path = DynamicWallpaper;
 			sourceTree = "<group>";
@@ -69,6 +91,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DDF2AF29A897CD217DEDE867 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				554D3CDA5FB83E8E6E4F0FE9 /* Pods_DynamicWallpaper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -76,6 +106,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE3283BD29370C4C008A1E46 /* Build configuration list for PBXNativeTarget "DynamicWallpaper" */;
 			buildPhases = (
+				0DC818215AC3D82461FFA378 /* [CP] Check Pods Manifest.lock */,
 				AE3283AA29370C4B008A1E46 /* Sources */,
 				AE3283AB29370C4B008A1E46 /* Frameworks */,
 				AE3283AC29370C4B008A1E46 /* Resources */,
@@ -134,6 +165,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0DC818215AC3D82461FFA378 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DynamicWallpaper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AE3283AA29370C4B008A1E46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -141,6 +197,8 @@
 			files = (
 				AE3283B429370C4B008A1E46 /* ContentView.swift in Sources */,
 				AE3283B229370C4B008A1E46 /* DynamicWallpaperApp.swift in Sources */,
+				BC58868D34842C5A356509C6 /* WallpaperView.swift in Sources */,
+				BC588065122AC5075A618FE6 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +320,7 @@
 		};
 		AE3283BE29370C4C008A1E46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7564613BE8BA72570880505C /* Pods-DynamicWallpaper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -274,13 +333,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ken109.DynamicWallpaper;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ken109.dynamic-wallpaper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -289,6 +349,7 @@
 		};
 		AE3283BF29370C4C008A1E46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F059E632F7E00F9CAE980F4B /* Pods-DynamicWallpaper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,13 +362,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ken109.DynamicWallpaper;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ken109.dynamic-wallpaper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
