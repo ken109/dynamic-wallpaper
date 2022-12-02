@@ -14,11 +14,9 @@ extension WKWebView {
 struct WebView: NSViewRepresentable {
     typealias NSViewType = WKWebView
 
-    var url: String = "https://ken109.github.io/wallpaper?disable-spotify"
-
     let webView: WKWebView
 
-    init() {
+    init(url: String) {
         webView = WKWebView(frame: .zero)
 
         if let url = URL(string: url) {
