@@ -14,23 +14,22 @@ extension WKWebView {
 struct WebView: NSViewRepresentable {
     typealias NSViewType = WKWebView
 
-    let webView: WKWebView
+    var url: String
 
     init(url: String) {
-        webView = WKWebView(frame: .zero)
-
-        if let url = URL(string: url) {
-            let request = URLRequest(url: url)
-            webView.load(request)
-        }
-
-        webView.setValue(false, forKey: "drawsBackground")
+        self.url = url
     }
 
     func makeNSView(context: Context) -> WKWebView {
-        webView
+        let webView = WKWebView(frame: .zero)
+        webView.setValue(false, forKey: "drawsBackground")
+        return webView
     }
 
     func updateNSView(_ nsView: WKWebView, context: Context) {
+        if let url = URL(string: url) {
+            let request = URLRequest(url: url)
+            nsView.load(request)
+        }
     }
 }

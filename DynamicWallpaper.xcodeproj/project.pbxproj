@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		0CCEE6B172BCA92ADE36F6E8 /* Pods_DynamicWallpaper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554D3CDA5FB83E8E6E4F0FE9 /* Pods_DynamicWallpaper.framework */; };
 		AE3283B229370C4B008A1E46 /* DynamicWallpaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */; };
-		AE3283B429370C4B008A1E46 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3283B329370C4B008A1E46 /* ContentView.swift */; };
+		AE3283B429370C4B008A1E46 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3283B329370C4B008A1E46 /* SettingsView.swift */; };
 		AE3283B629370C4C008A1E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B529370C4C008A1E46 /* Assets.xcassets */; };
 		AE3283B929370C4C008A1E46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */; };
 		BC588065122AC5075A618FE6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5889484685012C4A207E85 /* WebView.swift */; };
+		BC58845EB49DE322CCA84F67 /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588FF84C029DF29199DD6C /* Wallpaper.swift */; };
 		BC58868D34842C5A356509C6 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588601108DA861C59A2727 /* WallpaperView.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,12 +22,13 @@
 		7564613BE8BA72570880505C /* Pods-DynamicWallpaper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicWallpaper.debug.xcconfig"; path = "Target Support Files/Pods-DynamicWallpaper/Pods-DynamicWallpaper.debug.xcconfig"; sourceTree = "<group>"; };
 		AE3283AE29370C4B008A1E46 /* DynamicWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicWallpaperApp.swift; sourceTree = "<group>"; };
-		AE3283B329370C4B008A1E46 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AE3283B329370C4B008A1E46 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AE3283B529370C4C008A1E46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DynamicWallpaper.entitlements; sourceTree = "<group>"; };
 		BC588601108DA861C59A2727 /* WallpaperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperView.swift; sourceTree = "<group>"; };
 		BC5889484685012C4A207E85 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		BC588FF84C029DF29199DD6C /* Wallpaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallpaper.swift; sourceTree = "<group>"; };
 		F059E632F7E00F9CAE980F4B /* Pods-DynamicWallpaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicWallpaper.release.xcconfig"; path = "Target Support Files/Pods-DynamicWallpaper/Pods-DynamicWallpaper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,12 +75,13 @@
 			isa = PBXGroup;
 			children = (
 				AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */,
-				AE3283B329370C4B008A1E46 /* ContentView.swift */,
+				AE3283B329370C4B008A1E46 /* SettingsView.swift */,
 				AE3283B529370C4C008A1E46 /* Assets.xcassets */,
 				AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */,
 				AE3283B729370C4C008A1E46 /* Preview Content */,
 				BC588601108DA861C59A2727 /* WallpaperView.swift */,
 				BC5889484685012C4A207E85 /* WebView.swift */,
+				BC588FF84C029DF29199DD6C /* Wallpaper.swift */,
 			);
 			path = DynamicWallpaper;
 			sourceTree = "<group>";
@@ -195,10 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE3283B429370C4B008A1E46 /* ContentView.swift in Sources */,
+				AE3283B429370C4B008A1E46 /* SettingsView.swift in Sources */,
 				AE3283B229370C4B008A1E46 /* DynamicWallpaperApp.swift in Sources */,
 				BC58868D34842C5A356509C6 /* WallpaperView.swift in Sources */,
 				BC588065122AC5075A618FE6 /* WebView.swift in Sources */,
+				BC58845EB49DE322CCA84F67 /* Wallpaper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

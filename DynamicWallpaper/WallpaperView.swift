@@ -7,29 +7,18 @@
 
 import SwiftUI
 
-enum WallpaperType: String, CaseIterable {
-    case web
-}
-
 struct WallpaperView: View {
     let identifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier.init(rawValue: UUID().uuidString)
 
-    let type: WallpaperType
-    let contentRect: NSRect
+    let wallpaper: Wallpaper
 
     let innerView: NSPanel
 
-    var url: String?
-
-    private init(type: WallpaperType, contentRect: NSRect,
-                 url: String?) {
-        self.type = type
-        self.contentRect = contentRect
-
-        self.url = url
+    init(wallpaper: Wallpaper) {
+        self.wallpaper = wallpaper
 
         innerView = NSPanel(
-                contentRect: contentRect,
+                contentRect: wallpaper.contentRect,
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered, defer: false)
 
@@ -46,19 +35,27 @@ struct WallpaperView: View {
         innerView.orderFrontRegardless()
 
         disableControl()
-    }
 
-    init(contentRect: NSRect, url: String) {
-        self.init(type: .web, contentRect: contentRect, url: url)
+        self.wallpaper.setOnEnableControl { [self] in
+            innerView.level = NSWindow.Level(rawValue: NSWindow.Level.floating.rawValue - 1)
+            innerView.styleMask = [.titled]
+        }
+        self.wallpaper.setOnDisableControl { [self] in
+            disableControl()
+        }
     }
 
     var body: some View {
         VStack {
-            switch type {
+            switch wallpaper.type {
             case .web:
-                WebView(url: url!)
+                WebView(url: wallpaper.url!)
             }
         }
+    }
+
+    func update() {
+        innerView.contentView = NSHostingView(rootView: self)
     }
 
     func enableControl() {
@@ -69,6 +66,6 @@ struct WallpaperView: View {
     func disableControl() {
         innerView.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopIconWindow)) - 1)
         innerView.styleMask = [.nonactivatingPanel]
-        innerView.setFrame(contentRect, display: true)
+        innerView.setFrame(wallpaper.contentRect, display: true)
     }
 }
