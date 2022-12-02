@@ -17,19 +17,21 @@ struct WallpaperView: View {
     let type: WallpaperType
     let contentRect: NSRect
 
-    var innerView: NSPanel?
+    let innerView: NSPanel
 
     var url: String?
 
-    mutating func initInnerView() {
+    private init(type: WallpaperType, contentRect: NSRect,
+                 url: String?) {
+        self.type = type
+        self.contentRect = contentRect
+
+        self.url = url
+
         innerView = NSPanel(
                 contentRect: contentRect,
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered, defer: false)
-
-        guard let innerView else {
-            return
-        }
 
         innerView.identifier = NSUserInterfaceItemIdentifier(rawValue: UUID().uuidString)
 
@@ -47,11 +49,7 @@ struct WallpaperView: View {
     }
 
     init(contentRect: NSRect, url: String) {
-        type = .web
-        self.contentRect = contentRect
-        self.url = url
-
-        self.initInnerView()
+        self.init(type: .web, contentRect: contentRect, url: url)
     }
 
     var body: some View {
@@ -64,17 +62,11 @@ struct WallpaperView: View {
     }
 
     func enableControl() {
-        guard let innerView else {
-            return
-        }
         innerView.level = NSWindow.Level(rawValue: NSWindow.Level.floating.rawValue - 1)
         innerView.styleMask = [.titled]
     }
 
     func disableControl() {
-        guard let innerView else {
-            return
-        }
         innerView.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopIconWindow)) - 1)
         innerView.styleMask = [.nonactivatingPanel]
         innerView.setFrame(contentRect, display: true)
