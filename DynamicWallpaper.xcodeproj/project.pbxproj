@@ -13,8 +13,10 @@
 		AE3283B629370C4C008A1E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B529370C4C008A1E46 /* Assets.xcassets */; };
 		AE3283B929370C4C008A1E46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */; };
 		BC588065122AC5075A618FE6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5889484685012C4A207E85 /* WebView.swift */; };
+		BC5882BE4329AA61E457E5D2 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588435A413E9BE0FFD4581 /* Position.swift */; };
 		BC58845EB49DE322CCA84F67 /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588FF84C029DF29199DD6C /* Wallpaper.swift */; };
 		BC58868D34842C5A356509C6 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588601108DA861C59A2727 /* WallpaperView.swift */; };
+		BC588CE5F6096962A9E92B24 /* WallpaperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5886737D58306E03335DDA /* WallpaperStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +28,9 @@
 		AE3283B529370C4C008A1E46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DynamicWallpaper.entitlements; sourceTree = "<group>"; };
+		BC588435A413E9BE0FFD4581 /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		BC588601108DA861C59A2727 /* WallpaperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperView.swift; sourceTree = "<group>"; };
+		BC5886737D58306E03335DDA /* WallpaperStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperStore.swift; sourceTree = "<group>"; };
 		BC5889484685012C4A207E85 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		BC588FF84C029DF29199DD6C /* Wallpaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallpaper.swift; sourceTree = "<group>"; };
 		F059E632F7E00F9CAE980F4B /* Pods-DynamicWallpaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicWallpaper.release.xcconfig"; path = "Target Support Files/Pods-DynamicWallpaper/Pods-DynamicWallpaper.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				BC588601108DA861C59A2727 /* WallpaperView.swift */,
 				BC5889484685012C4A207E85 /* WebView.swift */,
 				BC588FF84C029DF29199DD6C /* Wallpaper.swift */,
+				BC588435A413E9BE0FFD4581 /* Position.swift */,
+				BC5886737D58306E03335DDA /* WallpaperStore.swift */,
 			);
 			path = DynamicWallpaper;
 			sourceTree = "<group>";
@@ -203,6 +209,8 @@
 				BC58868D34842C5A356509C6 /* WallpaperView.swift in Sources */,
 				BC588065122AC5075A618FE6 /* WebView.swift in Sources */,
 				BC58845EB49DE322CCA84F67 /* Wallpaper.swift in Sources */,
+				BC5882BE4329AA61E457E5D2 /* Position.swift in Sources */,
+				BC588CE5F6096962A9E92B24 /* WallpaperStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

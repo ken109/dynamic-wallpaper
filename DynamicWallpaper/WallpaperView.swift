@@ -18,7 +18,7 @@ struct WallpaperView: View {
         self.wallpaper = wallpaper
 
         innerView = NSPanel(
-                contentRect: wallpaper.contentRect,
+                contentRect: wallpaper.position.result(),
                 styleMask: [.nonactivatingPanel],
                 backing: .buffered, defer: false)
 
@@ -27,7 +27,6 @@ struct WallpaperView: View {
         innerView.contentView = NSHostingView(rootView: self)
 
         innerView.titleVisibility = .hidden
-        innerView.titlebarAppearsTransparent = true
 
         innerView.backgroundColor = NSColor(white: 1, alpha: 0)
         innerView.hasShadow = false
@@ -48,6 +47,8 @@ struct WallpaperView: View {
     var body: some View {
         VStack {
             switch wallpaper.type {
+            case .off:
+                EmptyView()
             case .web:
                 WebView(url: wallpaper.url!)
             }
@@ -56,6 +57,7 @@ struct WallpaperView: View {
 
     func update() {
         innerView.contentView = NSHostingView(rootView: self)
+        innerView.setFrame(wallpaper.position.result(), display: true)
     }
 
     func enableControl() {
@@ -66,6 +68,6 @@ struct WallpaperView: View {
     func disableControl() {
         innerView.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.desktopIconWindow)) - 1)
         innerView.styleMask = [.nonactivatingPanel]
-        innerView.setFrame(wallpaper.contentRect, display: true)
+        innerView.setFrame(wallpaper.position.result(), display: true)
     }
 }

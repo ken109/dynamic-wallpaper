@@ -21,14 +21,6 @@ struct DynamicWallpaperApp: App {
         }
             .windowStyle(HiddenTitleBarWindowStyle())
             .windowResizability(.contentSize)
-
-        Window("wallpapers", id: "wallpapers") {
-            List {
-                ForEach(wallpapers, id: \.identifier) { wallpaper in
-                    WallpaperView(wallpaper: wallpaper)
-                }
-            }
-        }
     }
 
     func buildWindow() {
@@ -44,13 +36,17 @@ struct DynamicWallpaperApp: App {
         }
 
         // wallpaper
-        let displaySize = NSScreen.main!.frame.size
+        wallpapers = WallpaperStore.shared.loadWallpapers()
 
-        wallpapers.append(
-                Wallpaper(
-                        url: "https://ken109.github.io/wallpaper",
-                        contentRect: NSRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
-                )
-        )
+        if wallpapers.isEmpty {
+            wallpapers.append(
+                    Wallpaper(
+                            "Clock",
+                            url: "https://ken109.github.io/wallpaper?disable-spotify",
+                            position: Position(.fullscreen)
+                    )
+            )
+            WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
+        }
     }
 }
