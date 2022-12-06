@@ -21,7 +21,9 @@ struct SettingsView: View {
             }
                 .toolbar {
                     Button {
-                        let wallpaper = Wallpaper("New Wallpaper", webUrl: "https://ken109.github.io/wallpaper?disable-spotify", position: Position(.center))
+                        let wallpaper = Wallpaper("New Wallpaper",
+                                webUrl: "https://ken109.github.io/wallpaper?disable-spotify",
+                                position: Position(.center))
                         wallpapers.add(wallpaper)
                         selectedWallpaper = wallpaper
                     } label: {
@@ -29,7 +31,7 @@ struct SettingsView: View {
                     }
                 }
         } detail: {
-            if let wallpaper = selectedWallpaper {
+            if let wallpaper = selectedWallpaper, !wallpaper.isClosed {
                 DetailSettingsView(wallpapers: wallpapers, wallpaper: wallpaper)
             } else {
                 Text("Select a wallpaper")
@@ -47,43 +49,28 @@ struct DetailSettingsView: View {
     @ObservedObject var wallpapers: WallpapersContainer
     @ObservedObject var wallpaper: Wallpaper
 
-    @State private var name: String
+    @State private var name: String = ""
 
     // position
-    @State private var wallpaperPositionType: PositionType
-    @State private var wallpaperPositionX: CGFloat
-    @State private var wallpaperPositionY: CGFloat
-    @State private var wallpaperPositionWidth: CGFloat
-    @State private var wallpaperPositionHeight: CGFloat
+    @State private var wallpaperPositionType: PositionType = .center
+    @State private var wallpaperPositionX: CGFloat = 0
+    @State private var wallpaperPositionY: CGFloat = 0
+    @State private var wallpaperPositionWidth: CGFloat = 0
+    @State private var wallpaperPositionHeight: CGFloat = 0
 
-    @State private var wallpaperType: WallpaperType
+    @State private var wallpaperType: WallpaperType = .off
 
     // web
-    @State private var webUrl: String
+    @State private var webUrl: String = ""
 
     // video
-    @State private var videoPath: String
+    @State private var videoPath: String = ""
 
     @State private var isControlEnabled: Bool = false
 
     init(wallpapers: WallpapersContainer, wallpaper: Wallpaper) {
         self.wallpapers = wallpapers
         self.wallpaper = wallpaper
-
-        // general
-        _name = State(initialValue: wallpaper.name)
-
-        // position
-        _wallpaperPositionType = State(initialValue: wallpaper.position.type)
-        _wallpaperPositionX = State(initialValue: wallpaper.position.x ?? 0)
-        _wallpaperPositionY = State(initialValue: wallpaper.position.y ?? 0)
-        _wallpaperPositionWidth = State(initialValue: wallpaper.position.width ?? 0)
-        _wallpaperPositionHeight = State(initialValue: wallpaper.position.height ?? 0)
-
-        // content
-        _wallpaperType = State(initialValue: wallpaper.type)
-        _webUrl = State(initialValue: wallpaper.webUrl ?? "")
-        _videoPath = State(initialValue: wallpaper.videoPath ?? "")
     }
 
     var body: some View {
@@ -245,7 +232,10 @@ struct DetailSettingsView: View {
         if wallpaperType == .video && FileManager.default.fileExists(atPath: videoPath) {
             let url = URL(fileURLWithPath: videoPath)
             do {
-                let bookmark = try url.bookmarkData(options: .securityScopeAllowOnlyReadAccess, includingResourceValuesForKeys: nil, relativeTo: nil)
+                let bookmark = try url.bookmarkData(
+                        options: .securityScopeAllowOnlyReadAccess,
+                        includingResourceValuesForKeys: nil,
+                        relativeTo: nil)
                 UserDefaults.standard.set(bookmark, forKey: "bookmark-" + wallpaper.id)
             } catch let error as NSError {
                 print("Set Bookmark Fails: \(error.description)")

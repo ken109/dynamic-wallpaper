@@ -25,6 +25,10 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
     // video
     @Published var videoPath: String? = nil
 
+    var isClosed: Bool {
+        view == nil
+    }
+
     private init(name: String, type: WallpaperType, position: Position,
                  webUrl: String?,
                  videoPath: String?
@@ -156,5 +160,6 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
     // close
     func close() {
         view?.innerView.close()
+        view = nil
     }
 }
