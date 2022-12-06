@@ -32,6 +32,11 @@ struct SettingsView: View {
         } detail: {
             DetailSettingsView(wallpapers: $wallpapers, wallpaper: $selectedWallpaper)
         }
+            .onDisappear {
+                wallpapers.forEach({ wallpaper in
+                    wallpaper.isControlEnabled = false
+                })
+            }
     }
 }
 
