@@ -10,11 +10,6 @@ import SwiftUI
 struct SettingsView: View {
     @Binding var wallpapers: [Wallpaper]
 
-    @State private var controlledWallpaperIdentifier: String? = nil
-    @State private var editingWallpaperIdentifier: String? = nil
-
-    @State private var editingUrl: String = ""
-
     @State private var selectedWallpaper: Wallpaper?
 
     var body: some View {
