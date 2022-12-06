@@ -19,6 +19,7 @@
 		BC58873D7EB90D4B2D958E18 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588DF4D58439931B9BCED9 /* WebView.swift */; };
 		BC588A330FE9D767659336E0 /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5882C1C7F63840B9E5CA9B /* Wallpaper.swift */; };
 		BC588B8DB8CA158FF50E8091 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC58843D8BCF1460536854EE /* Position.swift */; };
+		BC588D6768CC8E501888D30C /* CommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588B73EA71F10EE405BCD3 /* CommandView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		BC58843D8BCF1460536854EE /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		BC5886E55E2332C99ED2A289 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BC58875EE1FA4E9173147B16 /* WallpapersContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpapersContainer.swift; sourceTree = "<group>"; };
+		BC588B73EA71F10EE405BCD3 /* CommandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandView.swift; sourceTree = "<group>"; };
 		BC588DF4D58439931B9BCED9 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		BC588F76F53FFD9C399C747A /* WallpaperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperView.swift; sourceTree = "<group>"; };
 		F059E632F7E00F9CAE980F4B /* Pods-DynamicWallpaper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicWallpaper.release.xcconfig"; path = "Target Support Files/Pods-DynamicWallpaper/Pods-DynamicWallpaper.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				BC5886E55E2332C99ED2A289 /* SettingsView.swift */,
 				BC588DF4D58439931B9BCED9 /* WebView.swift */,
 				BC58819FA9509A17DD028D6B /* VideoView.swift */,
+				BC588B73EA71F10EE405BCD3 /* CommandView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				BC58873D7EB90D4B2D958E18 /* WebView.swift in Sources */,
 				BC5887098AEDE5DB527835B9 /* VideoView.swift in Sources */,
 				BC5885447B4CF3447E6B34A5 /* WallpapersContainer.swift in Sources */,
+				BC588D6768CC8E501888D30C /* CommandView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

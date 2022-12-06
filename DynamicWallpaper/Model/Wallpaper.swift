@@ -8,6 +8,7 @@ enum WallpaperType: String, CaseIterable, Codable {
     case off
     case web
     case video
+    case command
 }
 
 class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
@@ -25,13 +26,17 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
     // video
     @Published var videoPath: String? = nil
 
+    // command
+    @Published var command: String? = nil
+
     var isClosed: Bool {
         view == nil
     }
 
     private init(name: String, type: WallpaperType, position: Position,
                  webUrl: String?,
-                 videoPath: String?
+                 videoPath: String?,
+                 command: String?
     ) {
         id = UUID().uuidString
         self.name = name
@@ -39,23 +44,29 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
         self.position = position
         self.webUrl = webUrl
         self.videoPath = videoPath
+        self.command = command
 
         view = WallpaperView(wallpaper: self)
     }
 
     // none type
     convenience init(_ name: String, position: Position) {
-        self.init(name: name, type: .off, position: position, webUrl: nil, videoPath: nil)
+        self.init(name: name, type: .off, position: position, webUrl: nil, videoPath: nil, command: nil)
     }
 
     // web type
     convenience init(_ name: String, webUrl: String, position: Position) {
-        self.init(name: name, type: .web, position: position, webUrl: webUrl, videoPath: nil)
+        self.init(name: name, type: .web, position: position, webUrl: webUrl, videoPath: nil, command: nil)
     }
 
     // video type
     convenience init(_ name: String, videoPath: String, position: Position) {
-        self.init(name: name, type: .video, position: position, webUrl: nil, videoPath: videoPath)
+        self.init(name: name, type: .video, position: position, webUrl: nil, videoPath: videoPath, command: nil)
+    }
+
+    // command type
+    convenience init(_ name: String, command: String, position: Position) {
+        self.init(name: name, type: .command, position: position, webUrl: nil, videoPath: nil, command: command)
     }
 
     // identifiable
@@ -76,6 +87,7 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
         case position
         case webUrl
         case videoPath
+        case command
     }
 
     required init(from decoder: Decoder) throws {
@@ -86,6 +98,7 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
         position = try container.decode(Position.self, forKey: .position)
         webUrl = try? container.decode(String.self, forKey: .webUrl)
         videoPath = try? container.decode(String.self, forKey: .videoPath)
+        command = try? container.decode(String.self, forKey: .command)
 
         if type == .video {
             if let bookmarkData = UserDefaults.standard.object(forKey: "bookmark-" + id) as? Data {
@@ -110,6 +123,7 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
         try container.encode(position, forKey: .position)
         try container.encode(webUrl, forKey: .webUrl)
         try container.encode(videoPath, forKey: .videoPath)
+        try container.encode(command, forKey: .command)
     }
 
     // misc

@@ -66,6 +66,9 @@ struct DetailSettingsView: View {
     // video
     @State private var videoPath: String = ""
 
+    // command
+    @State private var command: String = ""
+
     @State private var isControlEnabled: Bool = false
 
     init(wallpapers: WallpapersContainer, wallpaper: Wallpaper) {
@@ -132,6 +135,9 @@ struct DetailSettingsView: View {
                                 }
                             }
                         }
+                    }
+                    if wallpaperType == .command {
+                        TextField("command", text: $command, axis: .vertical)
                     }
                 }
             }
@@ -204,6 +210,7 @@ struct DetailSettingsView: View {
         wallpaperType = wallpaper.type
         webUrl = wallpaper.webUrl ?? ""
         videoPath = wallpaper.videoPath ?? ""
+        command = wallpaper.command ?? ""
 
         isControlEnabled = wallpaper.isControlEnabled
     }
@@ -231,6 +238,7 @@ struct DetailSettingsView: View {
         wallpaper.type = wallpaperType
         wallpaper.webUrl = webUrl
         wallpaper.videoPath = videoPath
+        wallpaper.command = command
 
         if wallpaperType == .video && FileManager.default.fileExists(atPath: videoPath) {
             let url = URL(fileURLWithPath: videoPath)

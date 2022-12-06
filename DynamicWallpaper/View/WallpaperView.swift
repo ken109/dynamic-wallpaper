@@ -52,6 +52,8 @@ struct WallpaperView: View {
                 WebView(url: wallpaper.webUrl!)
             case .video:
                 VideoView(path: wallpaper.videoPath!)
+            case .command:
+                CommandView(command: wallpaper.command!)
             }
         }
             .edgesIgnoringSafeArea(.all)
