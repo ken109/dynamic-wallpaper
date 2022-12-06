@@ -135,6 +135,7 @@ struct DetailSettingsView: View {
                     }
                 }
             }
+                .disabled(isControlEnabled)
 
             Spacer()
 
@@ -159,6 +160,7 @@ struct DetailSettingsView: View {
                     } label: {
                         Text("Control")
                     }
+                        .disabled(wallpaper.position.type != wallpaperPositionType)
                 }
 
                 Spacer()
@@ -190,12 +192,13 @@ struct DetailSettingsView: View {
         // general
         name = wallpaper.name
 
+        let defaultPosition = Position(.custom)
         // position
         wallpaperPositionType = wallpaper.position.type
-        wallpaperPositionX = wallpaper.position.x ?? 0
-        wallpaperPositionY = wallpaper.position.y ?? 0
-        wallpaperPositionWidth = wallpaper.position.width ?? 0
-        wallpaperPositionHeight = wallpaper.position.height ?? 0
+        wallpaperPositionX = wallpaper.position.x ?? defaultPosition.x!
+        wallpaperPositionY = wallpaper.position.y ?? defaultPosition.y!
+        wallpaperPositionWidth = wallpaper.position.width ?? defaultPosition.width!
+        wallpaperPositionHeight = wallpaper.position.height ?? defaultPosition.height!
 
         // content
         wallpaperType = wallpaper.type

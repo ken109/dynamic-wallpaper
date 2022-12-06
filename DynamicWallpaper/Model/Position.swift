@@ -72,15 +72,6 @@ struct Position: Codable {
         self.height = height
     }
 
-    // from NSRect
-    init(rect: NSRect) {
-        type = .custom
-        x = rect.origin.x
-        y = rect.origin.y
-        width = rect.size.width
-        height = rect.size.height
-    }
-
     func result() -> NSRect {
         switch type {
         case .fullscreen:

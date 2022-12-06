@@ -121,7 +121,20 @@ class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
         if let view = view {
             let frame = view.innerView.frame
             if let contentFrame = view.innerView.contentView?.frame {
-                position = Position(rect: NSRect(x: frame.minX, y: frame.minY, width: contentFrame.width, height: contentFrame.height))
+                switch position.type {
+                case .fullscreen:
+                    break
+                case .center:
+                    position = Position(.center,
+                            width: contentFrame.width,
+                            height: contentFrame.height)
+                case .custom:
+                    position = Position(.custom,
+                            x: frame.minX,
+                            y: frame.minY,
+                            width: contentFrame.width,
+                            height: contentFrame.height)
+                }
             }
         }
     }
