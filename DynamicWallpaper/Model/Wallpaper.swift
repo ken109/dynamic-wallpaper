@@ -7,6 +7,7 @@ import SwiftUI
 enum WallpaperType: String, CaseIterable, Codable {
     case off
     case web
+    case video
 }
 
 class Wallpaper: Codable, Identifiable, Hashable {
@@ -17,27 +18,40 @@ class Wallpaper: Codable, Identifiable, Hashable {
     var type: WallpaperType
     var position: Position
     var name: String
-    var url: String?
+
+    // web
+    var webUrl: String? = nil
+
+    // video
+    var videoPath: String? = nil
 
     private init(name: String, type: WallpaperType, position: Position,
-                 url: String?) {
+                 webUrl: String?,
+                 videoPath: String?
+    ) {
         id = UUID().uuidString
         self.name = name
         self.type = type
         self.position = position
-        self.url = url
+        self.webUrl = webUrl
+        self.videoPath = videoPath
 
         view = WallpaperView(wallpaper: self)
     }
 
     // none type
     convenience init(_ name: String, position: Position) {
-        self.init(name: name, type: .off, position: position, url: nil)
+        self.init(name: name, type: .off, position: position, webUrl: nil, videoPath: nil)
     }
 
     // web type
-    convenience init(_ name: String, url: String, position: Position) {
-        self.init(name: name, type: .web, position: position, url: url)
+    convenience init(_ name: String, webUrl: String, position: Position) {
+        self.init(name: name, type: .web, position: position, webUrl: webUrl, videoPath: nil)
+    }
+
+    // video type
+    convenience init(_ name: String, videoPath: String, position: Position) {
+        self.init(name: name, type: .video, position: position, webUrl: nil, videoPath: videoPath)
     }
 
     // identifiable
@@ -56,7 +70,8 @@ class Wallpaper: Codable, Identifiable, Hashable {
         case name
         case type
         case position
-        case url
+        case webUrl
+        case videoPath
     }
 
     required init(from decoder: Decoder) throws {
@@ -65,7 +80,20 @@ class Wallpaper: Codable, Identifiable, Hashable {
         name = try container.decode(String.self, forKey: .name)
         type = try container.decode(WallpaperType.self, forKey: .type)
         position = try container.decode(Position.self, forKey: .position)
-        url = try? container.decode(String.self, forKey: .url)
+        webUrl = try? container.decode(String.self, forKey: .webUrl)
+        videoPath = try? container.decode(String.self, forKey: .videoPath)
+
+        if type == .video {
+            if let bookmarkData = UserDefaults.standard.object(forKey: "bookmark-" + id) as? Data {
+                do {
+                    var bookmarkIsStale = false
+                    let url = try URL.init(resolvingBookmarkData: bookmarkData as Data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &bookmarkIsStale)
+                    let _ = url.startAccessingSecurityScopedResource()
+                } catch let error as NSError {
+                    print("Bookmark Access Fails: \(error.description)")
+                }
+            }
+        }
 
         view = WallpaperView(wallpaper: self)
     }
@@ -76,7 +104,8 @@ class Wallpaper: Codable, Identifiable, Hashable {
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
         try container.encode(position, forKey: .position)
-        try container.encode(url, forKey: .url)
+        try container.encode(webUrl, forKey: .webUrl)
+        try container.encode(videoPath, forKey: .videoPath)
     }
 
     // misc
@@ -93,7 +122,7 @@ class Wallpaper: Codable, Identifiable, Hashable {
         }
     }
 
-    // web control
+    // control
     private var _isControlEnabled: Bool = false
     var isControlEnabled: Bool {
         get {

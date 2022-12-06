@@ -11,8 +11,10 @@
 		AE3283B229370C4B008A1E46 /* DynamicWallpaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */; };
 		AE3283B629370C4C008A1E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B529370C4C008A1E46 /* Assets.xcassets */; };
 		AE3283B929370C4C008A1E46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */; };
+		AED48BA6293F24AF00CE555A /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED48BA5293F24AF00CE555A /* AVKit.framework */; };
 		BC5880CBB5EADC1FBF44B7F5 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588F76F53FFD9C399C747A /* WallpaperView.swift */; };
 		BC588282FE9E38C6493543D3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5886E55E2332C99ED2A289 /* SettingsView.swift */; };
+		BC5887098AEDE5DB527835B9 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC58819FA9509A17DD028D6B /* VideoView.swift */; };
 		BC58873D7EB90D4B2D958E18 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588DF4D58439931B9BCED9 /* WebView.swift */; };
 		BC588A330FE9D767659336E0 /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5882C1C7F63840B9E5CA9B /* Wallpaper.swift */; };
 		BC588B8DB8CA158FF50E8091 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC58843D8BCF1460536854EE /* Position.swift */; };
@@ -27,6 +29,9 @@
 		AE3283B529370C4C008A1E46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DynamicWallpaper.entitlements; sourceTree = "<group>"; };
+		AED48BA5293F24AF00CE555A /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		AED48BA7293F691A00CE555A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BC58819FA9509A17DD028D6B /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		BC5882C1C7F63840B9E5CA9B /* Wallpaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallpaper.swift; sourceTree = "<group>"; };
 		BC58843D8BCF1460536854EE /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		BC5886737D58306E03335DDA /* WallpaperStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallpaperStore.swift; sourceTree = "<group>"; };
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED48BA6293F24AF00CE555A /* AVKit.framework in Frameworks */,
 				0CCEE6B172BCA92ADE36F6E8 /* Pods_DynamicWallpaper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +84,7 @@
 		AE3283B029370C4B008A1E46 /* DynamicWallpaper */ = {
 			isa = PBXGroup;
 			children = (
+				AED48BA7293F691A00CE555A /* Info.plist */,
 				AE3283B129370C4B008A1E46 /* DynamicWallpaperApp.swift */,
 				AE3283B529370C4C008A1E46 /* Assets.xcassets */,
 				AE3283BA29370C4C008A1E46 /* DynamicWallpaper.entitlements */,
@@ -103,6 +110,7 @@
 				BC588F76F53FFD9C399C747A /* WallpaperView.swift */,
 				BC5886E55E2332C99ED2A289 /* SettingsView.swift */,
 				BC588DF4D58439931B9BCED9 /* WebView.swift */,
+				BC58819FA9509A17DD028D6B /* VideoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,6 +127,7 @@
 		DDF2AF29A897CD217DEDE867 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AED48BA5293F24AF00CE555A /* AVKit.framework */,
 				554D3CDA5FB83E8E6E4F0FE9 /* Pods_DynamicWallpaper.framework */,
 			);
 			name = Frameworks;
@@ -227,6 +236,7 @@
 				BC5880CBB5EADC1FBF44B7F5 /* WallpaperView.swift in Sources */,
 				BC588282FE9E38C6493543D3 /* SettingsView.swift in Sources */,
 				BC58873D7EB90D4B2D958E18 /* WebView.swift in Sources */,
+				BC5887098AEDE5DB527835B9 /* VideoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +371,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicWallpaper/Info.plist;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -390,6 +401,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicWallpaper/Info.plist;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -42,7 +42,7 @@ struct DynamicWallpaperApp: App {
             wallpapers.append(
                     Wallpaper(
                             "Clock",
-                            url: "https://ken109.github.io/wallpaper?disable-spotify",
+                            webUrl: "https://ken109.github.io/wallpaper?disable-spotify",
                             position: Position(.fullscreen)
                     )
             )

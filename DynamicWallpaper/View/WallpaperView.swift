@@ -49,9 +49,12 @@ struct WallpaperView: View {
             case .off:
                 EmptyView()
             case .web:
-                WebView(url: wallpaper.url!)
+                WebView(url: wallpaper.webUrl!)
+            case .video:
+                VideoView(path: wallpaper.videoPath!)
             }
         }
+            .edgesIgnoringSafeArea(.all)
     }
 
     func update() {

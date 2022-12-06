@@ -21,7 +21,7 @@ struct SettingsView: View {
             }
                 .toolbar {
                     Button {
-                        let wallpaper = Wallpaper("New Wallpaper", url: "https://example.com", position: Position(.center))
+                        let wallpaper = Wallpaper("New Wallpaper", webUrl: "https://ken109.github.io/wallpaper?disable-spotify", position: Position(.center))
                         wallpapers.append(wallpaper)
                         WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
                         selectedWallpaper = wallpaper
@@ -53,7 +53,12 @@ struct DetailSettingsView: View {
     @State private var wallpaperPositionHeight: CGFloat
 
     @State private var wallpaperType: WallpaperType
+
+    // web
     @State private var webUrl: String
+
+    // video
+    @State private var videoPath: String
 
     @State private var isControlEnabled: Bool = false
 
@@ -69,7 +74,8 @@ struct DetailSettingsView: View {
         _wallpaperPositionHeight = State(initialValue: wallpaper.wrappedValue?.position.height ?? 0)
 
         _wallpaperType = State(initialValue: wallpaper.wrappedValue?.type ?? .off)
-        _webUrl = State(initialValue: wallpaper.wrappedValue?.url ?? "")
+        _webUrl = State(initialValue: wallpaper.wrappedValue?.webUrl ?? "")
+        _videoPath = State(initialValue: wallpaper.wrappedValue?.videoPath ?? "")
     }
 
     var body: some View {
@@ -108,6 +114,28 @@ struct DetailSettingsView: View {
 
                         if wallpaperType == .web {
                             TextField("url", text: $webUrl, axis: .vertical)
+                        }
+                        if wallpaperType == .video {
+                            LabeledContent("path") {
+                                HStack {
+                                    Text(videoPath)
+                                    Spacer()
+                                    Button("choose") {
+                                        let panel = NSOpenPanel()
+                                        panel.canChooseDirectories = false
+                                        panel.canChooseFiles = true
+                                        panel.allowsMultipleSelection = false
+                                        panel.allowedContentTypes = [.mpeg4Movie, .movie]
+                                        panel.begin { result in
+                                            if result == .OK {
+                                                if let url = panel.url {
+                                                    videoPath = url.path
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -172,7 +200,9 @@ struct DetailSettingsView: View {
         wallpaperPositionHeight = wallpaper?.position.height ?? 0
 
         wallpaperType = wallpaper?.type ?? .off
-        webUrl = wallpaper?.url ?? ""
+        webUrl = wallpaper?.webUrl ?? ""
+        videoPath = wallpaper?.videoPath ?? ""
+
         isControlEnabled = wallpaper?.isControlEnabled ?? false
     }
 
@@ -207,7 +237,18 @@ struct DetailSettingsView: View {
         }
 
         wallpaper.type = wallpaperType
-        wallpaper.url = webUrl
+        wallpaper.webUrl = webUrl
+        wallpaper.videoPath = videoPath
+
+        if wallpaperType == .video && FileManager.default.fileExists(atPath: videoPath) {
+            let url = URL(fileURLWithPath: videoPath)
+            do {
+                let bookmark = try url.bookmarkData(options: .securityScopeAllowOnlyReadAccess, includingResourceValuesForKeys: nil, relativeTo: nil)
+                UserDefaults.standard.set(bookmark, forKey: "bookmark-" + wallpaper.id)
+            } catch let error as NSError {
+                print("Set Bookmark Fails: \(error.description)")
+            }
+        }
 
         wallpaper.reload()
         WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
