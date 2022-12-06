@@ -10,7 +10,7 @@ enum WallpaperType: String, CaseIterable, Codable {
 }
 
 class Wallpaper: Codable, Identifiable, Hashable {
-    var view: WallpaperView?
+    private var view: WallpaperView?
 
     let id: String
 
@@ -119,5 +119,10 @@ class Wallpaper: Codable, Identifiable, Hashable {
 
     func setOnDisableControl(callback: @escaping () -> Void) {
         onDisableControl = callback
+    }
+
+    // close
+    func close() {
+        view?.innerView.close()
     }
 }

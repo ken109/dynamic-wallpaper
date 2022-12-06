@@ -139,6 +139,12 @@ struct DetailSettingsView: View {
                     Spacer()
 
                     Button {
+                        deleteWallpaper()
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+
+                    Button {
                         updateWallpaper()
                     } label: {
                         Image(systemName: "checkmark")
@@ -167,6 +173,15 @@ struct DetailSettingsView: View {
         wallpaperType = wallpaper?.type ?? .off
         webUrl = wallpaper?.url ?? ""
         isControlEnabled = wallpaper?.isControlEnabled ?? false
+    }
+
+    private func deleteWallpaper() {
+        wallpaper?.close()
+        wallpapers.removeAll {
+            $0.id == wallpaper?.id
+        }
+        wallpaper = nil
+        WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
     }
 
     private func updateWallpaper() {
