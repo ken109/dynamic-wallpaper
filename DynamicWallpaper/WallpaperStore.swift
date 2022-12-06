@@ -5,10 +5,10 @@
 import Foundation
 
 class WallpaperStore {
-    public static let shared = WallpaperStore()
-
     private init() {
     }
+
+    public static let shared = WallpaperStore()
 
     func saveWallpapers(wallpapers: [Wallpaper]) {
         let jsonEncoder = JSONEncoder()
