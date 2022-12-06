@@ -36,8 +36,7 @@ struct WallpaperView: View {
         disableControl()
 
         self.wallpaper.setOnEnableControl { [self] in
-            innerView.level = NSWindow.Level(rawValue: NSWindow.Level.floating.rawValue - 1)
-            innerView.styleMask = [.titled]
+            enableControl()
         }
         self.wallpaper.setOnDisableControl { [self] in
             disableControl()
@@ -62,7 +61,7 @@ struct WallpaperView: View {
 
     func enableControl() {
         innerView.level = NSWindow.Level(rawValue: NSWindow.Level.floating.rawValue - 1)
-        innerView.styleMask = [.titled]
+        innerView.styleMask = [.titled, .resizable]
     }
 
     func disableControl() {

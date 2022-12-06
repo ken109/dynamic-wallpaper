@@ -26,7 +26,7 @@ struct SettingsView: View {
             }
                 .toolbar {
                     Button {
-                        let wallpaper = Wallpaper("New Wallpaper", position: Position(.center))
+                        let wallpaper = Wallpaper("New Wallpaper", url: "https://example.com", position: Position(.center))
                         wallpapers.append(wallpaper)
                         WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
                         selectedWallpaper = wallpaper
@@ -121,6 +121,7 @@ struct DetailSettingsView: View {
                             // save position
                             wallpaper.savePosition()
                             setFormValues()
+                            updateWallpaper()
 
                             isControlEnabled = false
                             wallpaper.isControlEnabled = false

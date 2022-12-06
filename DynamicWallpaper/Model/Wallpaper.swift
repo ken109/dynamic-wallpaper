@@ -86,7 +86,10 @@ class Wallpaper: Codable, Identifiable, Hashable {
 
     func savePosition() {
         if let view = view {
-            position = Position(rect: view.innerView.frame)
+            let frame = view.innerView.frame
+            if let contentFrame = view.innerView.contentView?.frame {
+                position = Position(rect: NSRect(x: frame.minX, y: frame.minY, width: contentFrame.width, height: contentFrame.height))
+            }
         }
     }
 
