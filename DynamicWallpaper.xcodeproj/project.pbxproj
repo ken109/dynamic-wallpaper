@@ -12,7 +12,6 @@
 		AE3283B629370C4C008A1E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B529370C4C008A1E46 /* Assets.xcassets */; };
 		AE3283B929370C4C008A1E46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */; };
 		AED48BA6293F24AF00CE555A /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED48BA5293F24AF00CE555A /* AVKit.framework */; };
-		AED48BA9293F92DA00CE555A /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED48BA8293F92DA00CE555A /* MusicKit.framework */; };
 		BC5880CBB5EADC1FBF44B7F5 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588F76F53FFD9C399C747A /* WallpaperView.swift */; };
 		BC588282FE9E38C6493543D3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5886E55E2332C99ED2A289 /* SettingsView.swift */; };
 		BC5885447B4CF3447E6B34A5 /* WallpapersContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC58875EE1FA4E9173147B16 /* WallpapersContainer.swift */; };
@@ -50,7 +49,6 @@
 			files = (
 				AED48BA6293F24AF00CE555A /* AVKit.framework in Frameworks */,
 				0CCEE6B172BCA92ADE36F6E8 /* Pods_DynamicWallpaper.framework in Frameworks */,
-				AED48BA9293F92DA00CE555A /* MusicKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
