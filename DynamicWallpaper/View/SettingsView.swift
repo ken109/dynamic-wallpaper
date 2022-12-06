@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Binding var wallpapers: [Wallpaper]
+    @ObservedObject var wallpapers: WallpapersContainer
 
-    @State private var selectedWallpaper: Wallpaper?
+    @State private var selectedWallpaper: Wallpaper? = nil
 
     var body: some View {
         NavigationSplitView {
-            List(wallpapers, selection: $selectedWallpaper) { wallpaper in
+            List(wallpapers.value, selection: $selectedWallpaper) { wallpaper in
                 NavigationLink(value: wallpaper) {
                     Text(wallpaper.name)
                 }
@@ -22,18 +22,21 @@ struct SettingsView: View {
                 .toolbar {
                     Button {
                         let wallpaper = Wallpaper("New Wallpaper", webUrl: "https://ken109.github.io/wallpaper?disable-spotify", position: Position(.center))
-                        wallpapers.append(wallpaper)
-                        WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
+                        wallpapers.add(wallpaper)
                         selectedWallpaper = wallpaper
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
         } detail: {
-            DetailSettingsView(wallpapers: $wallpapers, wallpaper: $selectedWallpaper)
+            if let wallpaper = selectedWallpaper {
+                DetailSettingsView(wallpapers: wallpapers, wallpaper: wallpaper)
+            } else {
+                Text("Select a wallpaper")
+            }
         }
             .onDisappear {
-                wallpapers.forEach({ wallpaper in
+                wallpapers.value.forEach({ wallpaper in
                     wallpaper.isControlEnabled = false
                 })
             }
@@ -41,9 +44,10 @@ struct SettingsView: View {
 }
 
 struct DetailSettingsView: View {
-    @Binding var wallpapers: [Wallpaper]
+    @ObservedObject var wallpapers: WallpapersContainer
+    @ObservedObject var wallpaper: Wallpaper
 
-    @Binding var wallpaper: Wallpaper?
+    @State private var name: String
 
     // position
     @State private var wallpaperPositionType: PositionType
@@ -62,75 +66,79 @@ struct DetailSettingsView: View {
 
     @State private var isControlEnabled: Bool = false
 
-    init(wallpapers: Binding<[Wallpaper]>, wallpaper: Binding<Wallpaper?>) {
-        _wallpapers = wallpapers
-        _wallpaper = wallpaper
+    init(wallpapers: WallpapersContainer, wallpaper: Wallpaper) {
+        self.wallpapers = wallpapers
+        self.wallpaper = wallpaper
+
+        // general
+        _name = State(initialValue: wallpaper.name)
 
         // position
-        _wallpaperPositionType = State(initialValue: wallpaper.wrappedValue?.position.type ?? .center)
-        _wallpaperPositionX = State(initialValue: wallpaper.wrappedValue?.position.x ?? 0)
-        _wallpaperPositionY = State(initialValue: wallpaper.wrappedValue?.position.y ?? 0)
-        _wallpaperPositionWidth = State(initialValue: wallpaper.wrappedValue?.position.width ?? 0)
-        _wallpaperPositionHeight = State(initialValue: wallpaper.wrappedValue?.position.height ?? 0)
+        _wallpaperPositionType = State(initialValue: wallpaper.position.type)
+        _wallpaperPositionX = State(initialValue: wallpaper.position.x ?? 0)
+        _wallpaperPositionY = State(initialValue: wallpaper.position.y ?? 0)
+        _wallpaperPositionWidth = State(initialValue: wallpaper.position.width ?? 0)
+        _wallpaperPositionHeight = State(initialValue: wallpaper.position.height ?? 0)
 
-        _wallpaperType = State(initialValue: wallpaper.wrappedValue?.type ?? .off)
-        _webUrl = State(initialValue: wallpaper.wrappedValue?.webUrl ?? "")
-        _videoPath = State(initialValue: wallpaper.wrappedValue?.videoPath ?? "")
+        // content
+        _wallpaperType = State(initialValue: wallpaper.type)
+        _webUrl = State(initialValue: wallpaper.webUrl ?? "")
+        _videoPath = State(initialValue: wallpaper.videoPath ?? "")
     }
 
     var body: some View {
-        if let wallpaper {
-            VStack {
-                Form {
-                    Section("Position") {
-                        Picker("type", selection: $wallpaperPositionType) {
-                            ForEach(PositionType.allCases, id: \.self) { position in
-                                Text(position.rawValue)
-                            }
-                        }
-                            .pickerStyle(.menu)
+        VStack {
+            Form {
+                TextField("name", text: $name)
 
-                        if wallpaperPositionType != .fullscreen {
-                            TextField("width", value: $wallpaperPositionWidth, formatter: NumberFormatter())
-                                .frame(width: 100)
-                            TextField("height", value: $wallpaperPositionHeight, formatter: NumberFormatter())
-                                .frame(width: 100)
-                        }
-                        if wallpaperPositionType == .custom {
-                            TextField("x", value: $wallpaperPositionX, formatter: NumberFormatter())
-                                .frame(width: 100)
-                            TextField("y", value: $wallpaperPositionY, formatter: NumberFormatter())
-                                .frame(width: 100)
+                Section("Position") {
+                    Picker("type", selection: $wallpaperPositionType) {
+                        ForEach(PositionType.allCases, id: \.self) { position in
+                            Text(position.rawValue)
                         }
                     }
+                        .pickerStyle(.menu)
 
-                    Section("Content") {
-                        Picker("type", selection: $wallpaperType) {
-                            ForEach(WallpaperType.allCases, id: \.self) { type in
-                                Text(type.rawValue)
-                            }
-                        }
-                            .pickerStyle(.menu)
+                    if wallpaperPositionType != .fullscreen {
+                        TextField("width", value: $wallpaperPositionWidth, formatter: NumberFormatter())
+                            .frame(width: 100)
+                        TextField("height", value: $wallpaperPositionHeight, formatter: NumberFormatter())
+                            .frame(width: 100)
+                    }
+                    if wallpaperPositionType == .custom {
+                        TextField("x", value: $wallpaperPositionX, formatter: NumberFormatter())
+                            .frame(width: 100)
+                        TextField("y", value: $wallpaperPositionY, formatter: NumberFormatter())
+                            .frame(width: 100)
+                    }
+                }
 
-                        if wallpaperType == .web {
-                            TextField("url", text: $webUrl, axis: .vertical)
+                Section("Content") {
+                    Picker("type", selection: $wallpaperType) {
+                        ForEach(WallpaperType.allCases, id: \.self) { type in
+                            Text(type.rawValue)
                         }
-                        if wallpaperType == .video {
-                            LabeledContent("path") {
-                                HStack {
-                                    Text(videoPath)
-                                    Spacer()
-                                    Button("choose") {
-                                        let panel = NSOpenPanel()
-                                        panel.canChooseDirectories = false
-                                        panel.canChooseFiles = true
-                                        panel.allowsMultipleSelection = false
-                                        panel.allowedContentTypes = [.mpeg4Movie, .movie]
-                                        panel.begin { result in
-                                            if result == .OK {
-                                                if let url = panel.url {
-                                                    videoPath = url.path
-                                                }
+                    }
+                        .pickerStyle(.menu)
+
+                    if wallpaperType == .web {
+                        TextField("url", text: $webUrl, axis: .vertical)
+                    }
+                    if wallpaperType == .video {
+                        LabeledContent("path") {
+                            HStack {
+                                Text(videoPath)
+                                Spacer()
+                                Button("choose") {
+                                    let panel = NSOpenPanel()
+                                    panel.canChooseDirectories = false
+                                    panel.canChooseFiles = true
+                                    panel.allowsMultipleSelection = false
+                                    panel.allowedContentTypes = [.mpeg4Movie, .movie]
+                                    panel.begin { result in
+                                        if result == .OK {
+                                            if let url = panel.url {
+                                                videoPath = url.path
                                             }
                                         }
                                     }
@@ -139,86 +147,80 @@ struct DetailSettingsView: View {
                         }
                     }
                 }
+            }
+
+            Spacer()
+
+            // control button
+            HStack {
+                if isControlEnabled {
+                    Button {
+                        // save position
+                        wallpaper.savePosition()
+                        setFormValues(wallpaper: wallpaper)
+                        updateWallpaper()
+
+                        isControlEnabled = false
+                        wallpaper.isControlEnabled = false
+                    } label: {
+                        Text("Stop")
+                    }
+                } else {
+                    Button {
+                        isControlEnabled = true
+                        wallpaper.isControlEnabled = true
+                    } label: {
+                        Text("Control")
+                    }
+                }
 
                 Spacer()
 
-                // control button
-                HStack {
-                    if isControlEnabled {
-                        Button {
-                            // save position
-                            wallpaper.savePosition()
-                            setFormValues()
-                            updateWallpaper()
-
-                            isControlEnabled = false
-                            wallpaper.isControlEnabled = false
-                        } label: {
-                            Text("Stop")
-                        }
-                    } else {
-                        Button {
-                            isControlEnabled = true
-                            wallpaper.isControlEnabled = true
-                        } label: {
-                            Text("Control")
-                        }
-                    }
-
-                    Spacer()
-
-                    Button {
-                        deleteWallpaper()
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-
-                    Button {
-                        updateWallpaper()
-                    } label: {
-                        Image(systemName: "checkmark")
-                    }
-                        .disabled(isControlEnabled)
+                Button {
+                    wallpapers.remove(wallpaper)
+                } label: {
+                    Image(systemName: "trash")
                 }
+
+                Button {
+                    updateWallpaper()
+                } label: {
+                    Image(systemName: "checkmark")
+                }
+                    .disabled(isControlEnabled)
             }
-                .padding()
-                .onAppear(perform: setFormValues)
-                .onChange(of: wallpaper) { _ in
-                    setFormValues()
-                }
-        } else {
-            Text("Please select an item")
         }
+            .padding()
+            .onAppear {
+                setFormValues(wallpaper: wallpaper)
+            }
+            .onChange(of: wallpaper) { wallpaper in
+                setFormValues(wallpaper: wallpaper)
+            }
     }
 
-    private func setFormValues() {
+    private func setFormValues(wallpaper: Wallpaper) {
+        // general
+        name = wallpaper.name
+
         // position
-        wallpaperPositionType = wallpaper?.position.type ?? .center
-        wallpaperPositionX = wallpaper?.position.x ?? 0
-        wallpaperPositionY = wallpaper?.position.y ?? 0
-        wallpaperPositionWidth = wallpaper?.position.width ?? 0
-        wallpaperPositionHeight = wallpaper?.position.height ?? 0
+        wallpaperPositionType = wallpaper.position.type
+        wallpaperPositionX = wallpaper.position.x ?? 0
+        wallpaperPositionY = wallpaper.position.y ?? 0
+        wallpaperPositionWidth = wallpaper.position.width ?? 0
+        wallpaperPositionHeight = wallpaper.position.height ?? 0
 
-        wallpaperType = wallpaper?.type ?? .off
-        webUrl = wallpaper?.webUrl ?? ""
-        videoPath = wallpaper?.videoPath ?? ""
+        // content
+        wallpaperType = wallpaper.type
+        webUrl = wallpaper.webUrl ?? ""
+        videoPath = wallpaper.videoPath ?? ""
 
-        isControlEnabled = wallpaper?.isControlEnabled ?? false
-    }
-
-    private func deleteWallpaper() {
-        wallpaper?.close()
-        wallpapers.removeAll {
-            $0.id == wallpaper?.id
-        }
-        wallpaper = nil
-        WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
+        isControlEnabled = wallpaper.isControlEnabled
     }
 
     private func updateWallpaper() {
-        guard let wallpaper = wallpaper else {
-            return
-        }
+        // general
+        wallpaper.name = name
 
         // position
         switch wallpaperPositionType {
@@ -251,6 +253,6 @@ struct DetailSettingsView: View {
         }
 
         wallpaper.reload()
-        WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
+        wallpapers.save()
     }
 }

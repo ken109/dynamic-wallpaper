@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct DynamicWallpaperApp: App {
+    @ObservedObject var wallpapers: WallpapersContainer = WallpapersContainer()
+
     @State var built: Bool = false
-    @State var wallpapers: [Wallpaper] = []
 
     var body: some Scene {
         WindowGroup {
-            SettingsView(wallpapers: $wallpapers)
+            SettingsView(wallpapers: wallpapers)
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.willUpdateNotification), perform: { _ in
                     buildWindow()
                 })
@@ -35,18 +36,6 @@ struct DynamicWallpaperApp: App {
             window.collectionBehavior = [.canJoinAllSpaces]
         }
 
-        // wallpaper
-        wallpapers = WallpaperStore.shared.loadWallpapers()
-
-        if wallpapers.isEmpty {
-            wallpapers.append(
-                    Wallpaper(
-                            "Clock",
-                            webUrl: "https://ken109.github.io/wallpaper?disable-spotify",
-                            position: Position(.fullscreen)
-                    )
-            )
-            WallpaperStore.shared.saveWallpapers(wallpapers: wallpapers)
-        }
+        wallpapers.build()
     }
 }

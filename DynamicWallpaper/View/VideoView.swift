@@ -4,7 +4,6 @@
 
 import SwiftUI
 import AVKit
-import Foundation
 
 struct VideoView: View {
     @State private var player: AVPlayer

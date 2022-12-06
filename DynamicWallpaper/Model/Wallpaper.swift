@@ -10,20 +10,20 @@ enum WallpaperType: String, CaseIterable, Codable {
     case video
 }
 
-class Wallpaper: Codable, Identifiable, Hashable {
+class Wallpaper: Codable, Identifiable, Hashable, ObservableObject {
     private var view: WallpaperView?
 
     let id: String
 
-    var type: WallpaperType
-    var position: Position
-    var name: String
+    @Published var type: WallpaperType
+    @Published var position: Position
+    @Published var name: String
 
     // web
-    var webUrl: String? = nil
+    @Published var webUrl: String? = nil
 
     // video
-    var videoPath: String? = nil
+    @Published var videoPath: String? = nil
 
     private init(name: String, type: WallpaperType, position: Position,
                  webUrl: String?,
