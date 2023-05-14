@@ -10,6 +10,10 @@
 	<string>DynamicWallpaper</string>
 	<key>CFBundleExecutable</key>
 	<string>DynamicWallpaper</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.ken109.dynamic-wallpaper</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -25,7 +29,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>

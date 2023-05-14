@@ -5,62 +5,62 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.104851">
+      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.116858">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to mac set_version_number lane" time="0.001297">
+      <testcase classname="fastlane.lanes" name="01: Switch to mac set_version_number lane" time="0.002558">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: increment_version_number" time="3.217303">
+      <testcase classname="fastlane.lanes" name="02: increment_version_number" time="3.052024">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: Switch to mac increment_all_app_build_numbers lane" time="0.000407">
+      <testcase classname="fastlane.lanes" name="03: Switch to mac increment_all_app_build_numbers lane" time="0.000304">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: increment_build_number" time="2.186569">
+      <testcase classname="fastlane.lanes" name="04: increment_build_number" time="1.903492">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: Switch to mac build lane" time="0.000422">
+      <testcase classname="fastlane.lanes" name="05: Switch to mac build lane" time="0.000346">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to mac import_my_certificate lane" time="0.000423">
+      <testcase classname="fastlane.lanes" name="06: Switch to mac import_my_certificate lane" time="0.000375">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: create_keychain" time="0.117342">
+      <testcase classname="fastlane.lanes" name="07: create_keychain" time="0.106904">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: import_certificate" time="0.336237">
+      <testcase classname="fastlane.lanes" name="08: import_certificate" time="0.250451">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="09: build_mac_app" time="58.918678">
+      <testcase classname="fastlane.lanes" name="09: build_mac_app" time="57.748996">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: zip" time="0.032462">
+      <testcase classname="fastlane.lanes" name="10: zip" time="0.090805">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: delete_keychain" time="0.028769">
+      <testcase classname="fastlane.lanes" name="11: delete_keychain" time="0.026966">
         
       </testcase>
     

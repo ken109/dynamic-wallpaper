@@ -383,7 +383,7 @@
 				CODE_SIGN_ENTITLEMENTS = DynamicWallpaper/DynamicWallpaper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"DynamicWallpaper/Preview Content\"";
 				DEVELOPMENT_TEAM = Z8EHS2R828;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -415,7 +415,7 @@
 				CODE_SIGN_ENTITLEMENTS = DynamicWallpaper/DynamicWallpaper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"DynamicWallpaper/Preview Content\"";
 				DEVELOPMENT_TEAM = Z8EHS2R828;
 				ENABLE_HARDENED_RUNTIME = YES;
