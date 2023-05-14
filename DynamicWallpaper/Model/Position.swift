@@ -16,13 +16,13 @@ struct Position: Codable {
     private (set) var y: CGFloat?
     private (set) var width: CGFloat?
     private (set) var height: CGFloat?
-
+    
     // fullscreen or center or custom
     init(_ type: PositionType) {
         self.type = type
-
+        
         let displaySize = NSScreen.main!.frame.size
-
+        
         switch type {
         case .fullscreen:
             break
@@ -30,25 +30,25 @@ struct Position: Codable {
             width = displaySize.width / 3
             height = displaySize.height / 2
         case .custom:
-            x = displaySize.width / 5
-            y = displaySize.height / 5
+            x = 0
+            y = 0
             width = displaySize.width / 3
             height = displaySize.height / 2
         }
     }
-
+    
     // center or custom
     init(_ type: PositionType, width: CGFloat, height: CGFloat) {
         guard type == .center || type == .custom else {
             fatalError("Position type must be center or custom")
         }
-
+        
         self.type = type
         self.width = width
         self.height = height
-
+        
         let displaySize = NSScreen.main!.frame.size
-
+        
         switch type {
         case .fullscreen:
             break
@@ -59,7 +59,7 @@ struct Position: Codable {
             y = displaySize.height / 5
         }
     }
-
+    
     // custom
     init(_ type: PositionType, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) {
         guard type == .custom else {
@@ -71,29 +71,61 @@ struct Position: Codable {
         self.width = width
         self.height = height
     }
-
-    func result() -> NSRect {
+    
+    func getWidth() -> CGFloat {
         switch type {
         case .fullscreen:
-            return NSScreen.main!.frame
+            return NSScreen.main!.frame.width
         case .center:
             let displaySize = NSScreen.main!.frame.size
-            let width = width ?? displaySize.width
-            let height = height ?? displaySize.height
-            let x = (displaySize.width - width) / 2
-            let y = (displaySize.height - height) / 2
-            return NSRect(x: x, y: y, width: width, height: height)
+            return width ?? displaySize.width
         case .custom:
-            let x = x ?? 0
-            let y = y ?? 0
-            let width = width ?? 0
-            let height = height ?? 0
-            return NSRect(x: x, y: y, width: width, height: height)
+            return width ?? 0
         }
     }
-
+    
+    func getHeight() -> CGFloat {
+        switch type {
+        case .fullscreen:
+            return NSScreen.main!.frame.height
+        case .center:
+            let displaySize = NSScreen.main!.frame.size
+            return height ?? displaySize.height
+        case .custom:
+            return height ?? 0
+        }
+    }
+    
+    func getX() -> CGFloat {
+        let displaySize = NSScreen.main!.frame.size
+        let width = width ?? displaySize.width
+        
+        switch type {
+        case .fullscreen:
+            return 0 + width / 2
+        case .center:
+            return 0
+        case .custom:
+            return x ?? 0
+        }
+    }
+    
+    func getY() -> CGFloat {
+        let displaySize = NSScreen.main!.frame.size
+        let height = height ?? displaySize.height
+        
+        switch type {
+        case .fullscreen:
+            return 0 + height / 2
+        case .center:
+            return 0
+        case .custom:
+            return y ?? 0
+        }
+    }
+    
     // codable
-
+    
     enum CodingKeys: String, CodingKey {
         case type
         case x
@@ -101,7 +133,7 @@ struct Position: Codable {
         case width
         case height
     }
-
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(PositionType.self, forKey: .type)
@@ -118,7 +150,7 @@ struct Position: Codable {
             height = try container.decode(CGFloat.self, forKey: .height)
         }
     }
-
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)

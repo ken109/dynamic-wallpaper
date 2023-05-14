@@ -12,6 +12,7 @@
 		AE3283B629370C4C008A1E46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B529370C4C008A1E46 /* Assets.xcassets */; };
 		AE3283B929370C4C008A1E46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3283B829370C4C008A1E46 /* Preview Assets.xcassets */; };
 		AED48BA6293F24AF00CE555A /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED48BA5293F24AF00CE555A /* AVKit.framework */; };
+		AEEC79EE2A10AA4A007448BB /* WallpapersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEC79ED2A10AA4A007448BB /* WallpapersView.swift */; };
 		BC5880CBB5EADC1FBF44B7F5 /* WallpaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC588F76F53FFD9C399C747A /* WallpaperView.swift */; };
 		BC588282FE9E38C6493543D3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5886E55E2332C99ED2A289 /* SettingsView.swift */; };
 		BC5885447B4CF3447E6B34A5 /* WallpapersContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC58875EE1FA4E9173147B16 /* WallpapersContainer.swift */; };
@@ -33,6 +34,7 @@
 		AED48BA5293F24AF00CE555A /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		AED48BA7293F691A00CE555A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AED48BA8293F92DA00CE555A /* MusicKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MusicKit.framework; path = System/Library/Frameworks/MusicKit.framework; sourceTree = SDKROOT; };
+		AEEC79ED2A10AA4A007448BB /* WallpapersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpapersView.swift; sourceTree = "<group>"; };
 		BC58819FA9509A17DD028D6B /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		BC5882C1C7F63840B9E5CA9B /* Wallpaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallpaper.swift; sourceTree = "<group>"; };
 		BC58843D8BCF1460536854EE /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
@@ -110,8 +112,9 @@
 		BC5887E73D28490638D9B4F5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BC588F76F53FFD9C399C747A /* WallpaperView.swift */,
 				BC5886E55E2332C99ED2A289 /* SettingsView.swift */,
+				AEEC79ED2A10AA4A007448BB /* WallpapersView.swift */,
+				BC588F76F53FFD9C399C747A /* WallpaperView.swift */,
 				BC588DF4D58439931B9BCED9 /* WebView.swift */,
 				BC58819FA9509A17DD028D6B /* VideoView.swift */,
 				BC588B73EA71F10EE405BCD3 /* CommandView.swift */,
@@ -249,6 +252,7 @@
 				BC588282FE9E38C6493543D3 /* SettingsView.swift in Sources */,
 				BC58873D7EB90D4B2D958E18 /* WebView.swift in Sources */,
 				BC5887098AEDE5DB527835B9 /* VideoView.swift in Sources */,
+				AEEC79EE2A10AA4A007448BB /* WallpapersView.swift in Sources */,
 				BC5885447B4CF3447E6B34A5 /* WallpapersContainer.swift in Sources */,
 				BC588D6768CC8E501888D30C /* CommandView.swift in Sources */,
 			);
