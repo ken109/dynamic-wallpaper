@@ -2,7 +2,7 @@ default_platform(:mac)
 
 XCODE_PROJ_PATH = %w(./DynamicWallpaper.xcodeproj)
 BUILD_PATH="build"
-APP_NAME="Dynamic Wallpaper.app"
+APP_NAME="DynamicWallpaper.app"
 KEYCHAIN_NAME="map_app_keychain" # macのtypo...
 OUTPUT_PATH="build"
 

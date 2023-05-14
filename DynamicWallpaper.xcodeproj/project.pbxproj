@@ -390,7 +390,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DynamicWallpaper/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Dynamic Wallpaper";
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicWallpaper;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -422,7 +422,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DynamicWallpaper/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Dynamic Wallpaper";
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicWallpaper;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
