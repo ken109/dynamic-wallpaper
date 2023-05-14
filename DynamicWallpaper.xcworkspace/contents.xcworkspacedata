@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:fastlane"
+      name = "fastlane">
+      <FileRef
+         location = "group:Appfile">
+      </FileRef>
+      <FileRef
+         location = "group:Fastfile">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:DynamicWallpaper.xcodeproj">
    </FileRef>

@@ -1,0 +1,109 @@
+name: Release app
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  # Workflowの手動起動の設定です。
+  # version_numberを入力できるようにしています。
+  workflow_dispatch:
+    inputs:
+      version_number:
+        description: 'アプリのバージョン番号。入力例 0.3.0, 1.0.0 など。'
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  release:
+    # 実行環境をmacに設定。
+    runs-on: macos-latest
+
+    steps:
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      # defaultでWorkflowを実行したbranchがcheckoutされる。
+      - uses: actions/checkout@v2
+
+      - name: Show Git Branch
+        run: git symbolic-ref --short HEAD
+
+      # https://docs.github.com/ja/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+      # 上記のドキュメントにcertificateをGitHub Actionsのランナーにimport
+      # する方法が記載されています。
+      # 下の設定では、GitHubのsecretに設定したp12ファイルの内容を復元しています。
+      # 実際のcertificateのkeychainへのimportは、fastlaneで行っています。
+      - name: Generate p12 file
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+        # 以下で定義しているP12_PATHは、${{ runner.temp }}を利用することで、
+        # env: 内で定義可能かもしれません。（未検証）
+        run: |
+          P12_PATH=$RUNNER_TEMP/build_certificate.p12
+          echo $P12_PATH
+          # シークレットから証明書とプロビジョニングプロファイルをインポートする
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $P12_PATH
+
+      # commitに利用する情報を設定しています。
+      - name: git config
+        run: |
+          echo github.actor: ${{github.actor}}
+          git config user.name ${{github.actor}}
+
+      # fastlaneをbundle execで利用するためにbundlerを利用しています。
+      - name: bundle install
+        run: |
+          bundle install
+
+      # アプリのビルド処理です。
+      - name: Build DynamicWallpaper
+        # ここもP12_PATHは ${{ runner.temp }} を利用した方が良いかもしれません。
+        env:
+          # これらの環境変数はfastlaneの処理で利用します。
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          export P12_PATH=$RUNNER_TEMP/build_certificate.p12
+          echo $P12_PATH
+          # certificateのimport, アプリのビルド, 成果物用のzipファイル生成を行います。
+          bundle exec fastlane release version_number:${{github.event.inputs.version_number}}
+          # .はかなり雑かもしれません。
+          git add .
+          git commit -m "Release v${{github.event.inputs.version_number}}"
+          git push origin
+
+      # タグ付けをします。
+      - name: Create git tag
+        run: |
+          echo Create tag ${{github.event.inputs.version_number}}
+          git tag v${{github.event.inputs.version_number}}
+          git push origin v${{github.event.inputs.version_number}}
+
+      # GitHubのリリースページを作成します。(draftで作成します）
+      # actions/create-release@v1は既にメンテ終了しているので、
+      # 他のアクションを利用した方が良いです。
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: v${{github.event.inputs.version_number}}
+          release_name: Release v${{github.event.inputs.version_number}}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: true
+          prerelease: false
+
+      # リリースページに成果物のzipファイルをアップロードします。
+      - name: Upload Release Assets
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./build/DynamicWallpaper.app.zip
+          asset_name: DynamicWallpaper.app.zip
+          asset_content_type: application/zip

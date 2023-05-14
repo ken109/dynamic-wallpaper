@@ -1,0 +1,100 @@
+default_platform(:mac)
+
+XCODE_PROJ_PATH = %w(./DynamicWallpaper.xcodeproj)
+BUILD_PATH="build"
+APP_NAME="Dynamic Wallpaper.app"
+KEYCHAIN_NAME="map_app_keychain" # macのtypo...
+OUTPUT_PATH="build"
+
+platform :mac do
+
+  after_all do |lane|
+    # GitHubホストランナーの場合は不要です。
+    # create_keychainが呼ばれずにdelete_keychainを呼ぶと
+    # エラーになってしまいます。
+    delete_keychain(name: KEYCHAIN_NAME)
+  end
+
+  error do |lane|
+    # GitHubホストランナーの場合は不要です。
+    # create_keychainが呼ばれずにdelete_keychainを呼ぶと
+    # エラーになってしまいます。
+    delete_keychain(name: KEYCHAIN_NAME)
+  end
+
+  desc "release. option version: 0.3.0 ..."
+  lane :release do |options|
+      # プロジェクトにversion_numberを設定します。
+      set_version_number(
+        version_number: options[:version_number]
+      )
+
+      increment_all_app_build_numbers
+
+      build
+  end
+
+
+  desc "set version number"
+  lane :set_version_number do |options|
+    # increment_version_numberだと主のschemeに対してのみ
+    # 実行されるようなので、プロジェクト毎に設定しています。
+    XCODE_PROJ_PATH.each do |path|
+      increment_version_number(
+        xcodeproj: "#{path}",
+        version_number: options[:version_number]
+      )
+    end
+  end
+
+  desc "increment all app's build_numbers"
+  lane :increment_all_app_build_numbers do
+    # increment_xxx_numberだと主のschemeに対してのみ
+    # 実行されるようなので、プロジェクト毎に設定しています。
+    XCODE_PROJ_PATH.each do |path|
+      increment_build_number(
+        xcodeproj: "#{path}"
+      )
+    end
+  end
+
+  desc "build and zip app-file"
+  lane :build do
+    # certificateをimportしています。
+    # ここはciの時のみ実行するなど分岐があったほうが良さそうです。
+    import_my_certificate
+
+    build_mac_app(
+      workspace: "DynamicWallpaper.xcworkspace",
+      configuration: "Release",
+      scheme: "DynamicWallpaper",
+      export_method: "development",
+      clean: true,
+      output_directory: BUILD_PATH,
+      skip_package_pkg: true,
+      output_name: APP_NAME
+    )
+
+    zip(
+      path: "#{BUILD_PATH}/#{APP_NAME}",
+      output_path: "#{OUTPUT_PATH}/#{APP_NAME}.zip"
+    )
+
+  end
+
+  # ワークフローファイル側で設定しても問題ないと思いますが、fastlaneで設定しています。
+  # 参考: https://note.com/hayabusabusa/n/nbf4a1a095bf5
+  private_lane :import_my_certificate do
+    create_keychain(
+      name: KEYCHAIN_NAME,
+      password: ENV["KEYCHAIN_PASSWORD"],
+      timeout: 1800
+    )
+    import_certificate(
+      certificate_path: ENV["P12_PATH"],
+      certificate_password: ENV["P12_PASSWORD"],
+      keychain_name: KEYCHAIN_NAME,
+      keychain_password: ENV["KEYCHAIN_PASSWORD"]
+    )
+  end
+end
